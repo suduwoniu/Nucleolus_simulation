@@ -7,7 +7,7 @@ SimulationClusterNumber: Simulation the cluster number in the max-cross section 
 
 ImageAlignment: Register two images to get an average image (This code is adapted from the https://ww2.mathworks.cn/matlabcentral/fileexchange/18401-efficient-subpixel-image-registration-by-cross-correlation)
 
-##Mento
+## Mento
 inner3_calo_meto_v3.m: The main matlab code for simulation
 
 moveSteps_max_v1.m: 
