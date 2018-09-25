@@ -8,7 +8,7 @@ SimulationClusterNumber: Simulation the cluster number in the max-cross section 
 ImageAlignment: Register two images to get an average image (This code is adapted from the https://ww2.mathworks.cn/matlabcentral/fileexchange/18401-efficient-subpixel-image-registration-by-cross-correlation)
 
 ## Mento
-inner3_calo_meto_v3.m: The main matlab code for simulation. In a summary, all the processing factors are firstly randomly distributied in a 50*50*50 3D space. Then calculate the binding ability of each processing factor and give a disturbition to the 500 processing factors which have the lowest binding ability to pre-rRNAs, which are moved to the positions with a higher binding ability. After giving 10000 disturbition to this system and get the finnally optimal distribution of processing factors in a sub-nucleolus region 
+inner3_calo_meto_v3.m: The main matlab code for simulation. In a summary, all the processing factors are firstly randomly distributied in a 50*50*50 3D space. Then calculate the binding ability of each processing factor and give a disturbition to the 500 processing factors which have the lowest binding ability to pre-rRNAs, which are moved to the positions with a higher binding ability. After giving 10000 disturbution to this system and get the finnally optimal distribution of processing factors in a sub-nucleolus region 
 
 moveSteps_max_v1.m: This function find the 500 processing factors with the lower binding ability and randomly decide the moving direction and steps of them to new position of the higher binding ability 
 
@@ -37,6 +37,13 @@ Change the [number_shape] in the cutSphere.m from 12 to 30, and will get 200 tif
 ## ImageAlignmet
 This code is adapted from https://ww2.mathworks.cn/matlabcentral/fileexchange/18401-efficient-subpixel-image-registration-by-cross-correlation) for image registration and alignment
 
-FBL_alignment.m: Main code for image alignmet. Two input images, one is as a reference image and another is the aligning image. for the aligning image, it is rotated from 0 to 359 degree by 1 degree per rotation and the rotated images are stored after each rotation. After applying fast Fourier transform to the reference image and rotated images, the cross-correlation peak was individually calculated between the reference image and each rotated image. A rotated image, which has the best cross-correlation peak with the reference image, is then refined in the x-y scale according to the reference image to be the registered image. And 
+FBL_alignment.m: Main code for image alignmet. Two input images, one is as a reference image and another is the aligning image. for the aligning image, it is rotated from 0 to 359 degree by 1 degree per rotation and the rotated images are stored after each rotation. After applying fast Fourier transform to the reference image and rotated images, the cross-correlation peak was individually calculated between the reference image and each rotated image. A rotated image, which has the best cross-correlation peak with the reference image, is then refined in the x-y scale according to the reference image to be the registered image. And average this rotate image and aligned image to get an averaged look.
 
+dftregistration.m: This code gives the same precision as the FFT upsampled cross correlation in a small fraction of the computation time and with reduced memory requirements. It obtains an initial estimate of the crosscorrelation peak by an FFT and then refines the shift estimation by upsampling the DFT only in a small neighborhood of that estimate by means of a matrix-multiply DFT. With this procedure all the image points are used to compute the upsampled crosscorrelation.
+
+### Usage
+Give the template image path and aligning image path in the FBL_alignment.m:  
+f=im2double(imread('templage_image.tif'));  
+g=im2double(imread('align_image.tif'));  
+then run the FBL_alignment.m, output is the registering image and averaged image.
 
